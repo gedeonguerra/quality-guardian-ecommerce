@@ -4,7 +4,7 @@
 		"name": "Serverest",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "44193919",
-		"_collection_link": "https://gedeon-369700.postman.co/workspace/e8983347-8ea7-4638-873e-ff0b098825fd/collection/44193919-5db3c433-0063-4cc7-a1f6-1b1227e91be5?action=share&source=collection_link&creator=44193919"
+		"_collection_link": "https://gedeon-369700.postman.co/workspace/Gedeon-'s-Workspace~e8983347-8ea7-4638-873e-ff0b098825fd/collection/44193919-5db3c433-0063-4cc7-a1f6-1b1227e91be5?action=share&source=collection_link&creator=44193919"
 	},
 	"item": [
 		{
@@ -18,11 +18,10 @@
 							"script": {
 								"exec": [
 									"let responseJson = pm.response.json()\r",
-									"\r",
 									"let tokenSplit = responseJson['authorization'].split(' ')\r",
 									"\r",
-									"\r",
-									"pm.globals.set(\"AccessToken\", (tokenSplit[1]))"
+									"// Salva o token na variável de ambiente\r",
+									"pm.environment.set(\"AccessToken\", tokenSplit[1])"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -247,8 +246,8 @@
 									"    body: {\r",
 									"        mode: 'raw',\r",
 									"        raw: JSON.stringify({\r",
-									"            email: \"kenkai@qa.com\",\r",
-                                    "            password: \"123\"\r",
+									"            email: pm.globals.get('email'),\r",
+									"            password: pm.globals.get('password')\r",
 									"        }),\r",
 									"        options: {\r",
 									"            raw:{\r",
@@ -435,7 +434,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbmthaUBxYS5jb20iLCJwYXNzd29yZCI6IjEyMyIsImlhdCI6MTc0NDkwOTg2MiwiZXhwIjoxNzQ0OTEwNDYyfQ.42xcan0uywbSdfKEv9ZVN7fPdy29aAP5Nmwa-MXKQp8",
+									"value": "{{AccessToken}}",
 									"type": "string"
 								}
 							]
@@ -477,7 +476,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbmthaTAyMUBxYS5jb20iLCJwYXNzd29yZCI6IjMyMSIsImlhdCI6MTc0NDkxMTU2NywiZXhwIjoxNzQ0OTEyMTY3fQ.phwKgy-M2V-83FtecSyKkp78L_MMwP7vCZmlZMpLXIc",
+									"value": "{{AccessToken}}",
 									"type": "string"
 								}
 							]
@@ -554,7 +553,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbmthaTAyMUBxYS5jb20iLCJwYXNzd29yZCI6IjMyMSIsImlhdCI6MTc0NDkxMTU2NywiZXhwIjoxNzQ0OTEyMTY3fQ.phwKgy-M2V-83FtecSyKkp78L_MMwP7vCZmlZMpLXIc",
+									"value": "{{AccessToken}}",
 									"type": "string"
 								}
 							]
@@ -591,7 +590,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImtlbmthaTAyMUBxYS5jb20iLCJwYXNzd29yZCI6IjMyMSIsImlhdCI6MTc0NDkxMTU2NywiZXhwIjoxNzQ0OTEyMTY3fQ.phwKgy-M2V-83FtecSyKkp78L_MMwP7vCZmlZMpLXIc",
+									"value": "{{AccessToken}}",
 									"type": "string"
 								}
 							]
@@ -606,6 +605,319 @@
 							"path": [
 								"carrinhos",
 								"cancelar-compra"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cenários de CI",
+			"item": [
+				{
+					"name": "Login  Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let responseJson = pm.response.json()\r",
+									"let tokenSplit = responseJson['authorization'].split(' ')\r",
+									"\r",
+									"// Salva o token na variável de ambiente\r",
+									"pm.environment.set(\"AccessToken\", tokenSplit[1])"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"kenkai@qa.com\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro de usuários  Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const randomNumber = Math.floor(Math.random() * 9000)\r",
+									"const randomName = `User Number ${randomNumber}`\r",
+									"const randomEmail = `name.${randomNumber}@qa.com`\r",
+									"\r",
+									"pm.globals.set('email', randomEmail)\r",
+									"pm.globals.set('nome', randomName)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{nome}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"123\",\r\n    \"administrador\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuarios",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar produtos  Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"\r",
+									"const loginRequest = {\r",
+									"    url: pm.environment.get('baseURL') + '/login',\r",
+									"    method: 'POST',\r",
+									"    body: {\r",
+									"        mode: 'raw',\r",
+									"        raw: JSON.stringify({\r",
+									"            email: pm.globals.get('email'),\r",
+									"            password: pm.globals.get('password')\r",
+									"        }),\r",
+									"        options: {\r",
+									"            raw:{\r",
+									"                language: 'json'\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.sendRequest(loginRequest, function(err, response) {\r",
+									"    let resJson = response.json()\r",
+									"    let tokenSplit = resJson['authorization'].split(' ')\r",
+									"    pm.environment.set('AccessToken', tokenSplit[1])\r",
+									"})\r",
+									"\r",
+									"pm.globals.set('randomProduct', `Product ${Math.random()}`)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson = pm.response.json()\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"})\r",
+									"\r",
+									"if(pm.response.code == 201) {\r",
+									"    pm.globals.set('newProductId', responseJson._id)\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"{{randomProduct}}\",\r\n  \"preco\": 2604,\r\n  \"descricao\": \"smartphone\",\r\n  \"quantidade\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produtos",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar produtos por ID Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produtos/{{newProductId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								"{{newProductId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar  produtos  Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"})\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{AccessToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produtos/{{newProductId}}",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produtos",
+								"{{newProductId}}"
 							]
 						}
 					},
