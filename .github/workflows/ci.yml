@@ -32,4 +32,4 @@ jobs:
         run: npm install -g newman
 
       - name: Run Postman collection
-        run: newman run "postman/Serverest.postman_collection.json" -e "postman/ServerestDev.postman_environment.json" --folder "Cenários de CI"
+        run: newman run "postman/Serverest.postman_collection.json" -e "postman/ServerestDev.postman_environment.json" --folder "Cenários de CI Refatorado"
