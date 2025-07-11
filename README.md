@@ -22,7 +22,7 @@ Siga os passos abaixo para configurar e executar os testes em seu ambiente local
 
 1.  Clone o repositório:
     ```bash
-    git clone [https://github.com/gedeonguerra/quality-guardian-ecommerce.git](https://github.com/gedeonguerra/quality-guardian-ecommerce.git)
+    git clone [https://github.com/gedeonguerra/quality-guardian-ecommerce.git]
     ```
 2.  Navegue até o diretório do projeto:
     ```bash
